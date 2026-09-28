@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espacio Unid · Reservas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div>
+      <h1>Espacio Unid</h1>
+      <p>Reserva de espacios físicos de la universidad</p>
+    </div>
+    <label class="sesion">
+      Sesión iniciada como
+      <select id="selectUsuario"></select>
+    </label>
+  </header>
+
+  <main class="contenedor">
+    <!-- RF-3 y RF-4: consulta de espacios y disponibilidad -->
+    <section class="tarjeta">
+      <h2>Consultar disponibilidad</h2>
+      <form id="formFiltros" class="filtros">
+        <label>Fecha
+          <input type="date" id="filtroFecha" required>
+        </label>
+        <label>Tipo de espacio
+          <select id="filtroTipo">
+            <option value="">Todos</option>
+            <option value="LABORATORIO">Laboratorio</option>
+            <option value="SALA">Sala</option>
+            <option value="CANCHA">Cancha</option>
+            <option value="AUDITORIO">Auditorio</option>
+          </select>
+        </label>
+        <label>Capacidad mínima
+          <input type="number" id="filtroCapacidad" min="0" value="0">
+        </label>
+        <button type="submit" class="boton">Consultar</button>
+      </form>
+      <p class="leyenda">
+        <span class="chip disponible">Disponible</span>
+        <span class="chip ocupado">Ocupado</span>
+        <span class="chip pasado">No disponible</span>
+        Haz clic en una franja disponible para reservarla.
+      </p>
+      <div id="listaEspacios" class="espacios"></div>
+    </section>
+
+    <!-- RF-9: historial de reservas -->
+    <section class="tarjeta">
+      <h2>Mis reservas</h2>
+      <div class="tabla-scroll">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Espacio</th><th>Fecha</th><th>Horario</th><th>Estado</th><th></th></tr>
+          </thead>
+          <tbody id="tablaHistorial"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RNF-10: auditoría -->
+    <section class="tarjeta">
+      <div class="titulo-con-accion">
+        <h2>Bitácora de auditoría</h2>
+        <button type="button" id="btnReiniciar" class="boton secundario">Reiniciar datos de prueba</button>
+      </div>
+      <ul id="listaAuditoria" class="auditoria"></ul>
+    </section>
+  </main>
+
+  <!-- RF-6: confirmar la creación de la reserva -->
+  <dialog id="dialogoReserva">
+    <form method="dialog" id="formReserva">
+      <h2>Confirmar reserva</h2>
+      <dl id="detalleReserva" class="detalle"></dl>
+      <div class="acciones">
+        <button type="button" id="btnCancelarDialogo" class="boton secundario">Cancelar</button>
+        <button type="submit" class="boton">Reservar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- RF-7: confirmación de la reserva -->
+  <dialog id="dialogoConfirmacion">
+    <form method="dialog">
+      <h2>¡Reserva registrada!</h2>
+      <dl id="detalleConfirmacion" class="detalle"></dl>
+      <div class="acciones">
+        <button type="submit" class="boton">Aceptar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="mensaje" class="mensaje" role="status" hidden></div>
+
+  <script src="js/modelos.js"></script>
+  <script src="js/servicio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
